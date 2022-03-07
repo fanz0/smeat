@@ -1,26 +1,12 @@
-{% load static %}
+{% extends 'smapp/base.html' %}
 
-<link rel="stylesheet" href="{% static 'css/font.css' %}">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap" rel="stylesheet">
-
-<header>
-    <hgroup>
-        <div class="w3-center w3-jumbo w3-lime w3-padding">
-            <h1 class="w3-jumbo w3-wide w3-mer">SMEAT<br>
-                <a class="w3-xxxlarge w3-dance">Synthetic meat, origin authentication</a>
-            </h1>
-        </div>
-    </hgroup>
-</header>
-
-<body class="w3-pale-green">
-<form name="search" method="post" action="/search" class="w3-padding-64 w3-center">
+{% block content %}
+<form name="search" method="post" action="{% url 'lot_details' %}" class="w3-padding-64 w3-center">
+        {% csrf_token %}
     <label class="w3-xlarge w3-animate-right">
         Tracking code:
-        <input type="search" autocomplete="on" placeholder="0001..." name="code" required maxlength="10">
+        <input type="search" autocomplete="on" value="{{ lots.tracking_code  }}" placeholder="number of tracking" name="searched" required maxlength="10"  pattern="[1-9]{10}" title="10 numbers">
     </label>
-    <input type="button" value="track" class="w3-xlarge w3-hover-lime w3-ripple w3-animate-right">
+    <button class="w3-xlarge w3-animate-right">Track</button>
 </form>
-</body>
+{% endblock %}

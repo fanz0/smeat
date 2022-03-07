@@ -1,0 +1,26 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/font.css' %}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Secular+One&display=swap" rel="stylesheet">
+
+{% if user.is_authenticated %}
+<a href="admin/" class="w3-right">{% include './icons/account_circle_black_36dp.svg' %}</a>
+{% endif %}
+
+<header>
+    <hgroup>
+        <div class="w3-center w3-jumbo w3-lime w3-padding">
+            <h1 class="w3-jumbo w3-wide w3-mer"><a href="/">SMEAT</a><br>
+                <a class="w3-xxxlarge w3-dance">Synthetic meat, origin authentication</a>
+            </h1>
+        </div>
+    </hgroup>
+</header>
+
+<body class="w3-pale-green">
+{% block content %}
+{% endblock %}
+</body>

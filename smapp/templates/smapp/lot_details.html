@@ -1,0 +1,23 @@
+{% extends 'smapp/base.html' %}
+
+{% block content %}
+<center>
+    {% if tracks %}
+    <br>
+    {% for track in tracks %}
+    <h1>You searched for</h1>
+    <br>
+    <h1 class="w3-animate-zoom w3-xxxlarge">{{ track }}</h1>
+    <br>
+    <p class="w3-animate-bottom w3-xlarge" style="font-family: 'Archivo Black', sans-serif;">{{ track.text }}</p>
+    <br>
+        <br>
+        <p class="w3-animate-bottom w3-wide w3-large">Tutti i dati del lotto sono trascritti su blockchain. La transazione è consultabile trascrivendo il seguente codice nel sito <a href="https://ropsten.etherscan.io/">Etherscan</a>:</p>
+    <p style="font-family: 'Secular One', sans-serif;" class="w3-animate-bottom w3-large">{{ track.txId }}</p>
+
+    {% endfor %}
+    {% else %}
+    <h1>Ops! Tracking code doesn't exist. Refresh the <a href="/">home page</a> and retry...</h1>
+    {% endif %}
+</center>
+{% endblock %}
