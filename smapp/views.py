@@ -1,22 +1,15 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,HttpResponse
 from .models import Lot
-from ipware import get_client_ip
 
 # Create your views here.
 def home_page(request):
-
-    ip, is_routable = get_client_ip(request)
-
-    if ip is None:
-        ip='0.0.0.0'
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
     else:
-        if is_routable:
-            ipv='Public'
-        else:
-            ipv='Private'
-    print(ip,ipv)
+        ip = request.META.get('REMOTE_ADDR')
 
-    return render(request,'smapp/home_page.html')
+    return render(request,'smapp/home_page.html',{'ip':format(ip)})
 
 def lot_details(request):
     if request.method == "POST":
