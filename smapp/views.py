@@ -1,8 +1,21 @@
 from django.shortcuts import render,get_object_or_404
 from .models import Lot
+from ipware import get_client_ip
 
 # Create your views here.
 def home_page(request):
+
+    ip, is_routable = get_client_ip(request)
+
+    if ip is None:
+        ip='0.0.0.0'
+    else:
+        if is_routable:
+            ipv='Public'
+        else:
+            ipv='Private'
+    print(ip,ipv)
+
     return render(request,'smapp/home_page.html')
 
 def lot_details(request):
