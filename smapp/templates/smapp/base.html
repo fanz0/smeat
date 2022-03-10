@@ -8,14 +8,12 @@
 
 {% if user.is_authenticated %}
 <a href="admin/" class="w3-right">{% include './icons/account_circle_black_36dp.svg' %}</a>
-
-{% if ip != base_ip %}
+{% if ipsave != ipnow %}
 <div class="alert w3-lime w3-hover-red" style="font-family: 'Roboto Mono', monospace;">
   <span class="w3-btn" onclick="this.parentElement.style.display='none';">&times;</span>
-    Hey. You are logging from another ip address ({{ ip }})
+    Hey. You are logging from another ip address ({{ ipnow }})
 </div>
 {% endif %}
-
 {% endif %}
 
 <header>

@@ -32,3 +32,7 @@ class Lot(models.Model):
             return str(self.writeOnChain())
         else:
             return self.title
+
+class ip(models.Model):
+    pub_date=models.DateTimeField('date published')
+    ip_address=models.GenericIPAddressField()
