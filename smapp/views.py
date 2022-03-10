@@ -8,8 +8,8 @@ def home_page(request):
         ip = x_forwarded_for.split(',')[0]
     else:
         ip = request.META.get('REMOTE_ADDR')
-
-    return render(request, 'smapp/home_page.html', {'ip': ip})
+    base_ip='95.232.21.230'
+    return render(request, 'smapp/home_page.html', {'ip': ip,'base_ip':base_ip})
 
 def lot_details(request):
     if request.method == "POST":

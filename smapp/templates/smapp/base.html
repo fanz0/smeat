@@ -11,7 +11,9 @@
 
 <div class="alert w3-lime w3-hover-red" style="font-family: 'Roboto Mono', monospace;">
   <span class="w3-btn" onclick="this.parentElement.style.display='none';">&times;</span>
-  Hey. you are loggin in from {{ ip }} ip address
+    {% if ip != base_ip %}
+    Hey. You are logging from another ip address ({{ ip }})
+    {% endif %}
 </div>
 
 {% endif %}
