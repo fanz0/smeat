@@ -12,11 +12,11 @@ def client_ip(request):
         ipaddress = request.META.get('REMOTE_ADDR')
     get_ip=ip()
     get_ip.ip_address=ipaddress
-    return get_ip.save()
+    get_ip.save()
+    return get_ip.ip_address
 
 def home_page(request):
-    client_ip(request)
-    first_ip=request.META.get('REMOTE_ADDR')
+    first_ip=client_ip(request)
     return render(request, 'smapp/home_page.html', {'ip1':first_ip})
 
 def lot_details(request):
