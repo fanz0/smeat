@@ -16,8 +16,8 @@ def client_ip(request):
     return ipaddress
 
 def home_page(request):
-    first_ip=client_ip(request)
-    second_ip=request.META.get('REMOTE_ADDR')
+    first_ip=request.META.get('REMOTE_ADDR')
+    second_ip=client_ip(request)
     return render(request, 'smapp/home_page.html', {'ip1':first_ip,'ip2':second_ip})
 
 def lot_details(request):
