@@ -1,20 +1,24 @@
 from django.shortcuts import render,HttpResponse
 from .models import Lot
 from .models import ip
-import datetime
+
 
 # Create your views here.
-def home_page(request):
+def client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ipaddress = x_forwarded_for.split(',')[-1].strip()
     else:
         ipaddress = request.META.get('REMOTE_ADDR')
-    get_ip= ip() #imported class from model
+    get_ip= ip()
     get_ip.ip_address= ipaddress
-    get_ip.pub_date = datetime.date.today() #import datetime
     get_ip.save()
-    return render(request, 'smapp/home_page.html', {'ipsave': ipaddress,'ipnow':get_ip.ip_address })
+    return get_ip.ip_address
+
+def home_page(request):
+    first_ip=client_ip(request)
+    second_ip=request.META.get('REMOTE_ADDR')
+    return render(request, 'smapp/home_page.html', {'ip1':first_ip,'ip2':second_ip})
 
 def lot_details(request):
     if request.method == "POST":
