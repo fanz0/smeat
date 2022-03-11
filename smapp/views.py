@@ -16,8 +16,13 @@ def client_ip(request):
     return get_ip.ip_address
 
 def home_page(request):
-    first_ip=client_ip(request)
-    return render(request, 'smapp/home_page.html', {'ip1':first_ip})
+    current_ip=client_ip(request)
+    old_ip=request.META.get('REMOTE_ADDR')
+    if current_ip != old_ip:
+        get_ip=ip()
+        get_ip.ip_address=old_ip
+        get_ip.save()
+    return render(request, 'smapp/home_page.html', {'ip1':current_ip,'ip2':old_ip})
 
 def lot_details(request):
     if request.method == "POST":
