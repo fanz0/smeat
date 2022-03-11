@@ -13,7 +13,7 @@ def client_ip(request):
     get_ip= ip()
     get_ip.ip_address= ipaddress
     get_ip.save()
-    return get_ip.ip_address
+    return ipaddress
 
 def home_page(request):
     first_ip=client_ip(request)
