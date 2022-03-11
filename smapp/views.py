@@ -13,11 +13,15 @@ def client_ip(request):
     get_ip= ip()
     get_ip.ip_address= ipaddress
     get_ip.save()
-    return ipaddress
+    return get_ip.ip_address
 
 def home_page(request):
     first_ip=request.META.get('REMOTE_ADDR')
     second_ip=client_ip(request)
+    if first_ip!=second_ip:
+        on=first_ip
+        first_ip=second_ip
+        second_ip=on
     return render(request, 'smapp/home_page.html', {'ip1':first_ip,'ip2':second_ip})
 
 def lot_details(request):
