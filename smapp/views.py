@@ -19,6 +19,8 @@ def home_page(request):
     first_ip=client_ip(request)
     second_ip=request.META.get('REMOTE_ADDR')
     if first_ip!=second_ip:
+        first_ip=top
+        top=second_ip
         second_ip=first_ip
     return render(request, 'smapp/home_page.html', {'ip1':first_ip,'ip2':second_ip})
 
