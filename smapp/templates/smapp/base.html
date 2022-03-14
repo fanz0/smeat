@@ -7,20 +7,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lobster+Two&family=Roboto+Mono&family=Secular+One&display=swap" rel="stylesheet">
 
 {% if user.is_authenticated %}
-<a href="admin/" class="w3-right">{% include './icons/account_circle_black_36dp.svg' %}</a>
+<a href="admin/" class="w3-right w3-tooltip">{% include './icons/account_circle_black_36dp.svg' %}<span class="w3-text w3-left w3-tag w3-black w3-round w3-hover-green w3-tiny w3-margin-top">admin</span></a>
+<a href="{% url 'logout' %}" class="w3-left w3-tooltip">{% include './icons/logout_black_24dp.svg' %}<span class="w3-text w3-right w3-tag w3-black w3-round w3-hover-green w3-tiny w3-margin-top">logout</span></a>
+
 {% if ip1 != ip2 %}
 <div class="alert w3-lime w3-hover-red" style="font-family: 'Roboto Mono', monospace;">
   <span class="w3-btn" onclick="this.parentElement.style.display='none';">&times;</span>
     Hey! You are logged from another ip address ({{ ip1 }})
 </div>
 {% endif %}
+{% else %}
+<a href="{% url 'login' %}" class="w3-left w3-tooltip">{% include './icons/login_black_24dp.svg' %}<span class="w3-text w3-right w3-tag w3-black w3-round w3-hover-green w3-tiny w3-margin-top">login</span></a>
 {% endif %}
 
 
 <header>
     <hgroup>
         <div class="w3-center w3-jumbo w3-lime w3-padding">
-            <h1 class="w3-jumbo w3-wide w3-mer"><a href="/">SMEAT</a><br>
+            <h1 class="w3-jumbo w3-wide w3-mer w3-margin"><a href="/">SMEAT</a><br>
                 <a class="w3-xxxlarge w3-dance">Synthetic meat, origin authentication</a>
             </h1>
         </div>
@@ -28,6 +32,16 @@
 </header>
 
 <body class="w3-pale-green">
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert w3-pale-green w3-animate-right w3-margin w3-hover-text-red" style="font-family: 'Roboto Mono', monospace; width:34.5%">
+    {{ message }}
+  <span class="w3-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+</div>
+{% endfor %}
+{% endif %}
+
 {% block content %}
 {% endblock %}
 </body>
