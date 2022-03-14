@@ -17,11 +17,9 @@ def client_ip(request):
 
 def home_page(request):
     current_ip=client_ip(request)
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        old_ip = x_forwarded_for.split(',')[-1].strip()
-    else:
-        old_ip = request.META.get('REMOTE_ADDR')
+    old_ips=ip.objects.all()
+    for old_ip in old_ips:
+        old_ip=old_ip.ip_address
     return render(request, 'smapp/home_page.html', {'ip1':current_ip,'ip2':old_ip})
 
 def lot_details(request):
