@@ -17,9 +17,9 @@ def client_ip(request):
 
 def home_page(request):
     current_ip=client_ip(request)
-    old_ips=ip.objects.all()
-    for old_ip in old_ips:
-        old_ip=old_ip.ip_address
+    old_ip=ip.objects.all()
+    penultimate_index=len(old_ip)-2
+    old_ip=old_ip[penultimate_index].ip_address
     return render(request, 'smapp/home_page.html', {'ip1':current_ip,'ip2':old_ip})
 
 def lot_details(request):
