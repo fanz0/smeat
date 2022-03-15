@@ -11,7 +11,7 @@
 <a href="{% url 'logout' %}" class="w3-left w3-tooltip">{% include './icons/logout_black_24dp.svg' %}<span class="w3-text w3-right w3-tag w3-black w3-round w3-hover-green w3-tiny w3-margin-top">logout</span></a>
 
 {% if ip1 != ip2 %}
-<div class="alert w3-lime w3-hover-red" style="font-family: 'Roboto Mono', monospace;">
+<div class="alert w3-lime w3-hover-red w3-center" style="font-family: 'Roboto Mono', monospace;">
   <span class="w3-btn" onclick="this.parentElement.style.display='none';">&times;</span>
     Hey! You are logged from another ip address ({{ ip1 }})
 </div>
