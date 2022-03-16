@@ -1,0 +1,16 @@
+{% extends 'smapp/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<a class="w3-margin" href="{% url 'new_lot' %}">{% include './icons/add_circle_outline_black_24dp.svg' %}</a>
+{% for lot in lots %}
+<div class="w3-container w3-card w3-center">
+    <h1 class="w3-margin w3-hover-text-green"><a href="{% url 'single_lot' pk=lot.pk %}">{{ lot.title }}</a></h1>
+    <p class="w3-margin w3-large" style="font-family: 'Archivo Black', sans-serif;">{{ lot.text }}</p>
+    <p class="w3-margin w3-large" style="font-family: 'Secular One', sans-serif;">{{ lot.tracking_code }}</p>
+</div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'smapp/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="w3-container w3-card w3-center">
+    <h1 class="w3-margin w3-hover-text-green">{{ lot.title }}<a class="w3-margin-left" href="{% url 'lot_edit' pk=lot.pk %}">{% include './icons/edit_black_24dp.svg' %}</a></h1>
+    <p class="w3-margin w3-large" style="font-family: 'Archivo Black', sans-serif;">{{ lot.text }}</p>
+    <p class="w3-margin w3-large" style="font-family: 'Secular One', sans-serif;">{{ lot.tracking_code }}</p>
+</div>
+{% endif %}
+
+{% endblock %}

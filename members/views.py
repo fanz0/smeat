@@ -21,3 +21,4 @@ def logout_user(request):
     messages.success(request,'You were logged out!')
     return redirect('home_page')
 
+

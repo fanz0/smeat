@@ -1,6 +1,7 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Lot
 from .models import ip
+from .forms import LotForm
 
 
 # Create your views here.
@@ -29,3 +30,39 @@ def lot_details(request):
         return render(request, 'smapp/lot_details.html', {'searched': searched,'tracks':tracks})
     else:
         return render(request, 'smapp/lot_details.html', {})
+
+def lots_list(request):
+    lots=Lot.objects.all()
+    return render(request, 'smapp/lots_list.html',{'lots':lots})
+
+def single_lot(request,pk):
+    lot=get_object_or_404(Lot,pk=pk)
+    return render(request, 'smapp/single_lot.html',{'lot':lot})
+
+def new_lot(request):
+    if request.method=="POST":
+        form=LotForm(request.POST)
+        if form.is_valid():
+            lot=form.save(commit=False)
+            lot.author=request.user
+            if not lot.hash:
+                lot.writeOnChain()
+            lot.save()
+            return redirect('lots_list')
+    else:
+        form=LotForm()
+    return render(request, 'smapp/new_lot.html',{'form':form})
+
+def lot_edit(request,pk):
+    lot=get_object_or_404(Lot,pk=pk)
+    if request.method == "POST":
+        form = LotForm(request.POST,instance=lot)
+        if form.is_valid():
+            lot = form.save(commit=False)
+            lot.author = request.user
+            lot.save()
+            return redirect('lots_list')
+    else:
+        form = LotForm(instance=lot)
+    return render(request, 'smapp/lot_edit.html', {'form': form})
+
